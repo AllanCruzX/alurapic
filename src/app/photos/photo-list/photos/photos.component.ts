@@ -24,7 +24,6 @@ export class PhotosComponent implements OnChanges {
   }
 
   groupColumns(photos: Photo[] ) {
-
     
     const newRows = [];
 

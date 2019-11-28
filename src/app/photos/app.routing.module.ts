@@ -32,6 +32,6 @@ const routes: Routes = [
 })
 export class AppRoutingModule { 
 
-// resolve:{  photos: PhotoListComponent
+// resolve:{  photos: PhotoListComponent 
 }
 
