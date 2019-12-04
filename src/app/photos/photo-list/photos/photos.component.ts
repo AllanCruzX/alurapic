@@ -9,7 +9,7 @@ import { Photo } from '../../photo/photo';
 })
 export class PhotosComponent implements OnChanges {
 
-  //OnChanges é acionado toda vez que tiver uma mudança no componemte
+    //OnChanges é acionado toda vez que tiver uma mudança no componemte
   
   @Input() photos: Photo[] = [];
   rows: any[] = [];
@@ -17,18 +17,17 @@ export class PhotosComponent implements OnChanges {
   constructor() { }
   
   ngOnChanges(changes: SimpleChanges) {
-    //Um objeto do tipo SimpleChanges possui uma propriedade de mesmo nome da inbound property que sofreu mudança.
+   //Um objeto do tipo SimpleChanges possui uma propriedade de mesmo nome da inbound property que sofreu mudança.
     //O método ngOnChanges, quando chamado pelo próprio framework, recebe como parâmetro uma instância de SimpleChanges
     if(changes.photos) 
       this.rows = this.groupColumns(this.photos);
   }
 
-  groupColumns(photos: Photo[] ) {
-    
+  groupColumns(photos: Photo[]) {
     const newRows = [];
 
     for(let index = 0; index < photos.length; index+=3) {
-      newRows.push(photos.slice(index, index + 3) );
+      newRows.push(photos.slice(index, index + 3));
     }                            
     return newRows;
   }
