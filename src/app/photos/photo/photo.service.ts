@@ -16,7 +16,7 @@ export class PhotoService {
     listFromUser(userName: string) {
          //paginando consulta.
         return this.http
-            .get<Photo[]>(API + '/' + userName + '/photos');       
+            .get<Photo[]>(API + '/' + userName + '/photos'); //      
     }
 
     listFromUserPaginated(userName: string, page: number) {
