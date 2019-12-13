@@ -19,9 +19,9 @@ export class SearchComponent implements OnInit, OnDestroy {
          //aguarda 300 milisegundos para fazer a operação
     }    
     ngOnDestroy(): void {
-          //como o Observable   nunca se completa, ele ficará guardando um espaço na memória, e se saímos deste componente e vamos a outra página, a área da memória continuará ocupada, ocasionando em memory leaking .
+       //como o Observable   nunca se completa, ele ficará guardando um espaço na memória, e se saímos deste componente e vamos a outra página, a área da memória continuará ocupada, ocasionando em memory leaking .
     //Ele faz parte do ciclo de vida de um componente do Angular, sendo chamado toda vez que um objeto é destruído.
-        this.debounce.unsubscribe();
-        // unsubscribe(); para evitar memory leaking.
+    this.debounce.unsubscribe();
+    // unsubscribe(); para evitar memory leaking.
     }
  }

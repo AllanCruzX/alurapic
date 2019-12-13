@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
     selector: 'ap-vmessage',
     templateUrl: './vmessage.component.html'
 })
-export class VMessageComponent { 
+export class VMessageComponent {
 
     @Input() text = '';
-}
+ }
