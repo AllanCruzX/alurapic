@@ -3,7 +3,7 @@ import { UserService } from '../user/user.service';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-@Injectable({ providedIn: 'root'})
+@Injectable({ providedIn: 'root'})//Uma unica instancia 
 export class AuthGuard implements CanActivate {
     //O guarda de rotas serve para darmos consistência para nossa aplicação, liberando acesso apenas para as rotas que fazem sentido para nosso usuário.
 

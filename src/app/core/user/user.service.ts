@@ -4,8 +4,10 @@ import { BehaviorSubject } from 'rxjs';
 import { User } from './user';
 import * as jtw_decode from 'jwt-decode';
 
-@Injectable({ providedIn: 'root'})
+@Injectable({ providedIn: 'root'})//uma unica instancia para todos os seviços ao ser injetado.
 export class UserService { 
+    //Após a emissão de um valor, caso este não seja consumido ou escutado, o BehaviorSubject o manterá armazenado. E se alguém faz o subscribe depois, terá acesso ao último valor emitido.
+    //O BehaviorSubject armazena a última emissão até que alguém apareça para consumi-la.
 
     private userSubject = new BehaviorSubject<User>(null);
     private userName: string;
@@ -27,7 +29,7 @@ export class UserService {
 
     private decodeAndNotify() {
         const token = this.tokenService.getToken();
-        const user = jtw_decode(token) as User;
+        const user = jtw_decode(token) as User;//<- (aqui a chamada jwt_decode)
         this.userName = user.name;
         this.userSubject.next(user);
     }

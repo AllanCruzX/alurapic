@@ -7,8 +7,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class LoadButtonComponent implements OnInit {
 
+  //Pai emite para o filho (input);
+  //botão para carregar as imagens sobre demanda
   @Input() hasMore: boolean = false;
 
+  
   constructor() { }
 
   ngOnInit() {

@@ -6,7 +6,7 @@ const KEY = 'authToken';
 export class TokenService {
 
     hasToken() {
-        return !!this.getToken();
+        return !!this.getToken();// !! tranforma o metodo para boolean se for nulo ele retorna false 
     }
 
     setToken(token) {

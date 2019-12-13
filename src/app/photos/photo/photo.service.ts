@@ -7,6 +7,7 @@ const API = 'http://localhost:3000';
 
 @Injectable({ providedIn: 'root' })
 export class PhotoService {
+    //camada que se comunica com a API
 
     constructor(private http: HttpClient) {}
 

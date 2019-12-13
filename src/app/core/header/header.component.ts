@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent { 
 
+    //Com o Async pipe conseguimos capturar a emissão do Observable diretamente do nosso template. ex:  [routerLink]="['']
+
     user$: Observable<User>;
 
     constructor(
