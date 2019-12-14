@@ -3,7 +3,7 @@ import { SignUpService } from './signup.service';
 import { AbstractControl } from '@angular/forms';
 import { debounceTime, switchMap, map, first } from 'rxjs/operators';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class UserNotTakenValidatorService {
 
     // para que o signup.service.ts possa ser injetado. Para isso criamos a classe UserNotTakenValidatorService.
