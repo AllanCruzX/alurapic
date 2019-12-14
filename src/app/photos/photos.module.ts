@@ -11,6 +11,7 @@ import { DarkenOnHoverModule } from '../shared/directives/darken-on-hover/darken
         PhotoFormModule,
         PhotoListModule,
         DarkenOnHoverModule
+        
     ]
 })
 export class PhotosModule {}
