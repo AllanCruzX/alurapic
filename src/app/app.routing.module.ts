@@ -6,6 +6,7 @@ import { PhotoFormComponent } from './photos/photo-form/photo-form.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
 import {  AuthGuard } from './core/auth/auth.guard';
+import { PhotoDetailsComponent } from './photos/photo-details/photo-details.component';
 
 
 
@@ -35,6 +36,11 @@ const routes: Routes = [
         canActivate: [AuthGuard]
     },
     { 
+        path: 'p/:photoId', 
+        component: PhotoDetailsComponent,
+       
+    },
+    { 
         path: '**', 
         component: NotFoundComponent 
     }  
@@ -49,5 +55,7 @@ const routes: Routes = [
 export class AppRoutingModule {
     //Modulo responsavel por definir a rotas do sistema o angular usa esse modulo para saber qual pagina ira exibir atrves das urls (Antes de acessar o back-end o angular verifica a url exibi a pagina depois acessa o back-end).
 //<router-outlet></router-outlet> no app.component.htm e preciso usar a tag para as rotas serem acessadas.
+
+// path: 'p/:photoId',  - parametrizei a rota
  }
 

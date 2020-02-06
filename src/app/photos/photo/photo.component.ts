@@ -8,6 +8,9 @@ const CLOUD = 'http://localhost:3000/imgs/';
 })
 export class PhotoComponent {
 
+     //Pai emite para o filho (input);
+    //Filho emite para o pai (output).
+
     private _url = '';
 
     @Input() description='';
