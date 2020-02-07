@@ -28,8 +28,17 @@ export class PhotoListComponent implements OnInit {
   //() vem da view para a base de dados
 
   ngOnInit(): void {
-    this.userName = this.activatedRoute.snapshot.params.userName;
-    this.photos = this.activatedRoute.snapshot.data['photos'];
+
+    //O que queremos fazer é nos inscrever nos parâmetros de rota, e toda a vez que ele mudar - mesmo que o componente tenha sido carregado - uma ação será executada.
+
+    this.activatedRoute.params.subscribe(params => {
+      this.userName = params.userName;
+      this.photos = this.activatedRoute.snapshot.data['photos'];
+    });
+
+    //old
+    //this.userName = this.activatedRoute.snapshot.params.userName;
+    //this.photos = this.activatedRoute.snapshot.data['photos'];
      //snapshot fotografia do que está acontecendo no momento
    //data permite pegar a varivel do app.routing.module.ts
    //Esta é a motivação por trás do Resolver — a resolução de dados assíncronos dos quais o componente depende antes de ser ativado, no momento em que ativamos a rota, antes mesmo dela avaliar tal componente.
