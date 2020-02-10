@@ -1,4 +1,5 @@
 <div *ngIf="(comments$ | async) as comments">
+    <!--(comments$ | async) as comments - O async pipe realize a inscrição (subscribe) em um Observable. -->
     <ul class="list-unstyled comment-list">
         <li *ngFor="let comment of comments">
             <a class="text-dark font-weight-bold mr-1" [routerLink]="['/user', comment.userName]">
