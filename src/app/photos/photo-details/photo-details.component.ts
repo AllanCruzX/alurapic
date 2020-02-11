@@ -4,6 +4,8 @@ import { PhotoService } from "../photo/photo.service";
 import { Photo } from "../photo/photo";
 import { Observable } from "rxjs";
 import { PhotoComment } from '../photo/photo-comments';
+import { AlertService } from 'src/app/shared/components/alert/alert.service';
+import { UserService } from 'src/app/core/user/user.service';
 
 @Component({
     templateUrl: './photo-details.component.html',
@@ -19,19 +21,34 @@ export class PhotoDetailsComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private photoService: PhotoService,
-        private router : Router
+        private router : Router,
+        private alertService: AlertService,
+        private userService: UserService
     ) {}
 
     ngOnInit(): void {
          //Em seguida escreveremos em const photoId, this.route.params.photoId, lembrando que esse photoId é exatamente o nome que demos para o pathem app.routing.module.ts, isto é, path: 'p/:photoId', é importante que os nomes sejam iguais.
         this.photoId = this.route.snapshot.params.photoId;
         this.photo$ = this.photoService.findById(this.photoId)
+        this.photo$.subscribe(() => {}, err => {
+            console.log(err);
+            this.router.navigate(['not-found']);
+        });
 
-    }
+    }                 
 
     remove() {
         this.photoService
             .removePhoto(this.photoId)
-            .subscribe(() => this.router.navigate(['']));
+            .subscribe(
+                
+        () => {
+            this.alertService.success("Photo removed",true);
+            this.router.navigate(['/user', this.userService.getUserName()]);
+    },
+    err => {
+            console.log(err);
+            this.alertService.warning('Could not delete the photo!',true);
+    });
     }
 }
