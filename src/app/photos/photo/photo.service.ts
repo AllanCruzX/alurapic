@@ -3,8 +3,12 @@ import { Injectable } from '@angular/core';
 
 import { Photo } from "./photo";
 import { PhotoComment } from './photo-comments';
+import { map, catchError } from 'rxjs/operators';
+import { of, throwError } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
-const API = 'http://localhost:3000';
+//const API = 'http://localhost:3000';
+const API = environment.apiUrl;
 
 @Injectable({ providedIn: 'root' })
 export class PhotoService {
@@ -60,6 +64,27 @@ export class PhotoService {
 
     removePhoto(photoId: number) {
         return this.http.delete(API + '/photos/' + photoId);
+    }
+
+    indById(id: string) {
+
+        return this.http.get<Photo>(API + '/photos/' + id);
+    }
+
+    like(photoId: number) {
+
+        //observable com valor false. Para tanto, importaremos um operador RxJS of().
+        // of - pode criar uma observable de qualquer coisa.
+        //throwError - passa o erro adiante.(permitir lanca um erro que vai ser disparado pelo RXJS)
+        //Através do operador catchError podemos tratar erros, evitando assim que se propague para quem realizou a inscrição no Observable.
+
+        return this.http.post(
+            API + '/photos/' + photoId +  '/like', {}, {observe: 'response'}
+        )
+        .pipe(map(res => true))
+        .pipe(catchError(err => {
+            return err.status == '304' ? of(false) : throwError(err);
+        }));
     }
 
 }
