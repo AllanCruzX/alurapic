@@ -25,24 +25,39 @@ const routes: Routes = [
 
     { 
         path: 'user/:userName', 
+        pathMatch: 'full',
         component: PhotoListComponent,
         resolve: {
             photos: PhotoListResolver
+        },
+
+        data: { 
+            title: 'Timeline'
         }
+    
     },
     { 
         path: 'p/add', 
         component: PhotoFormComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { 
+            title: 'Photo upload'
+        }
     },
     { 
         path: 'p/:photoId', 
         component: PhotoDetailsComponent,
+        data: { 
+            title: 'Photo detail'
+        }
        
     },
     { 
         path: 'not-found',
-        component: NotFoundComponent
+        component: NotFoundComponent,
+        data: { 
+            title: 'Not found'
+        }
     },
     {
         path: '**',
@@ -61,5 +76,7 @@ export class AppRoutingModule {
 //<router-outlet></router-outlet> no app.component.htm e preciso usar a tag para as rotas serem acessadas.
 
 // path: 'p/:photoId',  - parametrizei a rota
+
+//data-> Na rota da timeline, inseriremos a propriedade data , em seguida definiremos o título como Timeline. O título de cada componente que equivale a uma página será definido no próprio sistema de rotas.
  }
 
