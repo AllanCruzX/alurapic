@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { PhotoService } from '../photo/photo.service';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
+import { HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
 import { AlertService } from 'src/app/shared/components/alert/alert.service';
 import { UserService } from 'src/app/core/user/user.service';
+import { PhotoService } from '../photo/photo.service';
+
 
 
 @Component({
@@ -16,6 +19,7 @@ export class PhotoFormComponent implements OnInit {
   photoForm: FormGroup;
   file: File;
   preview: string;
+  percentDone = 0;
 
   constructor(
     private formBuilder: FormBuilder ,
@@ -33,18 +37,32 @@ export class PhotoFormComponent implements OnInit {
     })
   }
 
-  upload() {
+ 
 
-    // getRawValue -me retorna o valor das variveis que estão no formulario 
+  upload() {
+     // getRawValue -me retorna o valor das variveis que estão no formulario 
+     //Foi necessário o emprego de condicionais no callback passado para subscribe pois ele será chamado diversas vezes trazendo o percentual de upload já realizado no evento HttpEventType.UploadProgress e quando terminar através de um evento do tipo Response.
     const description = this.photoForm.get('description').value;
     const allowComments = this.photoForm.get('allowComments').value;
-    console.log(this.file);
     this.photoService
-    .upload(description, allowComments, this.file)
-    .subscribe(() => {
-      this.alertService.success('Upload complete',true);
-      this.router.navigate(['/user', this.userService.getUserName()]);
-  });
+      .upload(description, allowComments, this.file)
+      .pipe(finalize(() =>
+      //finalize independente se der certo ou errado ele vai redirecionar a tela.
+          this.router.navigate(['/user', this.userService.getUserName()])
+         ))
+      .subscribe((event: HttpEvent<any>) => {
+        if(event.type == HttpEventType.UploadProgress) {
+          this.percentDone = Math.round(100 * event.loaded / event.total);
+        } else if(event instanceof  HttpResponse) {
+          this.alertService.success('Upload complete', true);
+        
+        }
+      },
+      err => {
+        console.log(err);
+        this.alertService.danger('Upload error!', true);
+      });
+
   }
 
   handleFile(file: File) {
