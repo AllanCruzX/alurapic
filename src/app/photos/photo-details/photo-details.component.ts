@@ -43,8 +43,9 @@ export class PhotoDetailsComponent implements OnInit {
             .subscribe(
                 
         () => {
+            //replaceUrl: true  - Troca navegação no history API a rota anterior pela rota que estamos acessando, evitando assim voltar para a rota anterior.
             this.alertService.success("Photo removed",true);
-            this.router.navigate(['/user', this.userService.getUserName()]);
+            this.router.navigate(['/user', this.userService.getUserName()], { replaceUrl: true });
     },
     err => {
             console.log(err);

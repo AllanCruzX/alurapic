@@ -6,6 +6,7 @@ import { NewUser } from './new-user';
 import { SignUpService } from './signup.service';
 import { Router } from '@angular/router';
 import { PlatformDetectorService } from 'src/app/core/plataform-detector/platform-detector.service';
+import { userNamePassword } from './username-password.validator';
 
 @Component({
     templateUrl: './signup.component.html',
@@ -63,6 +64,11 @@ export class SignUpComponent implements OnInit {
                     Validators.maxLength(14)
                 ]
             ]
+        },{
+            //validação crossfild (Com dois campos)
+            validator: userNamePassword
+
+
         });
 
         this.platformDetectorService.isPlatformBrowser() &&
@@ -70,13 +76,17 @@ export class SignUpComponent implements OnInit {
     }
 
     signup() {
-        const newUser = this.signupForm.getRawValue() as NewUser;
-        this.signUpService
-        .signup(newUser)
-        .subscribe(
-            () => this.router.navigate(['']),
-            err => console.log(err)
-        );
+        //Se o formulario está valido e não tem nada pendente ele executa.
+        //Podemos consultar se o formulário já foi submetido ou não através com auxílio de uma variável de template que guarda como valor uma referência para o ngForm Supondo que a variável de template se chame xyz, através de xyz.submitted sabemos se o formulário foi submetido ou não, inclusive podemos utilizar essa condição para exibição das mensagens de validação.
+        if(this.signupForm.valid && !this.signupForm.pending) {
+            const newUser = this.signupForm.getRawValue() as NewUser;
+            this.signUpService
+                .signup(newUser)
+                .subscribe(
+                    () => this.router.navigate(['']),
+                    err => console.log(err)
+               );
+                }
     }
 
 }
