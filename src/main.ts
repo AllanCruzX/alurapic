@@ -6,6 +6,7 @@ import { environment } from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
+  //Responsavel por compilar a aplicação.
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)

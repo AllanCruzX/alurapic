@@ -8,6 +8,7 @@ import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
 import {  AuthGuard } from './core/auth/auth.guard';
 import { PhotoDetailsComponent } from './photos/photo-details/photo-details.component';
 import { GlobalErrorComponent } from './errors/global-error/global-error.component';
+import { PaginaComponent } from './pagina/pagina.component';
 
 
 
@@ -67,6 +68,15 @@ const routes: Routes = [
             title: 'Error'
         }
     },
+
+    {
+        path: 'teste',
+        component: PaginaComponent,
+        data: {
+            title: 'Teste'
+        }
+    },
+
     {
         path: '**',
         redirectTo: 'not-found'

@@ -7,6 +7,8 @@ export const environment = {
   apiUrl: 'http://localhost:3000',
   serverLog: 'http://localhost:7000'
 
+  //ambiente de desenvolvimento
+
 };
 
 /*

@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import {  LoginGuard } from '../core/auth/login.guard';
 import { SignInComponent } from './signin/signin.component';
 import { SignUpComponent } from './signup/signup.component';
+import { PaginaComponent } from '../pagina/pagina.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
                     title: 'Sign up'
                 }
             },
+         
         ]
     }, 
 

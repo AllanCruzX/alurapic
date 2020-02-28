@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { ErrorsModule } from './errors/errors.module';
 
 import { CoreModule } from './core/core.module';
+import { PaginaModule } from './pagina/pagina.module';
 
 
 @NgModule({
@@ -18,10 +19,14 @@ import { CoreModule } from './core/core.module';
     PhotosModule,
      ErrorsModule,
      CoreModule,
-    AppRoutingModule
+    AppRoutingModule,
+    PaginaModule
    
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+  // bootstrap - inicialize o AppComponent.
+}
